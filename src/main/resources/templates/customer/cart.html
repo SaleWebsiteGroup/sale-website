@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+	<link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+	<title th:text="|Giỏ hàng|"></title>
+</head>
+<body class="bg-light">
+
+<header th:replace="~{decorator/header :: header}"></header>
+
+<!-- cart -->
+<section class="sectionCart">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1 th:text="|Giỏ hàng|"></h1>
+			</div>
+		</div>
+
+		<form th:action="@{/personal/cart/update}" method="POST">
+		<div th:if="${message != null and !#strings.isEmpty(message)}" class="alert alert-info">
+    <span th:text="${message}"></span>
+</div>
+			<div class="row gutter-3 gutter-lg-1">
+				<!-- content -->
+				<div class="col">
+					<!-- order list -->
+					<div class="bg-white cart-item-list p-2 p-lg-3 mb-1">
+						<div th:replace="~{decorator/order-cart :: order-cart}"></div>
+						<span th:if="${usercart == null or usercart.isEmpty()}">Không có sản phẩm nào</span>
+					</div>
+					<a th:href="@{/product/allproduct}" class="underlined">Tiếp tục mua hàng</a>
+					<div class="text-md-right">
+						<button type="submit" name="action" value="submit1" class=" btn btn-outline-secondary">Cập nhật giỏ hàng</button>
+					</div>
+				</div>
+
+				<!-- total order -->
+				<aside class="col-lg-4">
+					<div class="bg-white p-2 p-lg-3">
+						<h2 class="mb-3 text-uppercase fs-20" th:text="|Tổng hóa đơn|"></h2>
+						<ul class="list-group list-group-minimal mb-3">
+							<li class="list-group-item d-flex justify-content-between align-items-center text-uppercase font-weight-bold">
+								Tổng thanh toán
+								<span th:id="total" th:name="total" class="price text-red">0 ₫</span>
+								<input type="hidden" id="totalamount" name="totalamount" value="0">
+							</li>
+						</ul>
+						<button type="submit" name="action" value="submit2" class="btn btn-primary btn-block">
+							Thanh toán
+						</button>
+					</div>
+				</aside>
+			</div>
+		</form>
+	</div>
+</section>
+
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+
+<script>
+	function getQuantityByProductId(productId) {
+	    var quantityInput = document.getElementById('quantity-' + productId);
+	    return quantityInput ? quantityInput.value : 1; // Nếu không có input, trả về giá trị mặc định 1
+	}
+
+	function updateCartTotal() {
+    let total = 0;
+
+    document.querySelectorAll('.cart-item-checkbox').forEach((checkbox, index) => {
+        let priceElement = document.querySelectorAll('.quantity-price')[index];
+        let priceString = priceElement.dataset.price;
+
+        let price = parseFloat(priceString.replace(/[^\d.-]/g, ''));
+
+        let quantityInput = document.querySelectorAll('.quantity-input')[index];
+        let quantity = parseInt(quantityInput.value);
+
+        if (!isNaN(price) && !isNaN(quantity)) {
+            if (checkbox.checked) {
+                total += price * quantity;
+            }
+        } else {
+            console.error('Giá trị không hợp lệ. Giá:', price, 'Số lượng:', quantity);
+        }
+    });
+
+    document.getElementById('totalamount').value = total;
+    document.getElementById('total').textContent = total.toLocaleString() + ' ₫';
+}
+
+	function changeQuantity(button, delta) {
+    // Tìm ô nhập liệu gần nút bấm
+    var input = button.closest('div').querySelector('input[type="number"]');
+    var currentValue = parseInt(input.value);  // Lấy giá trị hiện tại
+    var newValue = currentValue + delta;       // Cộng hoặc trừ 1
+
+    // Đảm bảo giá trị nằm trong phạm vi min và max
+    if (newValue >= input.min && newValue <= input.max) {
+        input.value = newValue; // Cập nhật giá trị trong ô nhập liệu
+    }
+}
+
+	document.addEventListener('DOMContentLoaded', updateCartTotal);
+	document.querySelectorAll('.quantity-input').forEach(input => {
+    	input.addEventListener('change', updateCartTotal);
+});
+
+</script>
+
+</body>
+</html>

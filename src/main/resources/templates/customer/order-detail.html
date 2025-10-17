@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+    <title th:text="'Chi tiết đơn hàng'"></title>
+</head>
+<body class="bg-light">
+
+<!-- header -->
+<div th:replace="~{decorator/header :: header}"></div>
+
+<!-- content -->
+<section>
+    <div class="container">
+        <div class="row gutter-1 gutter-md-2">
+            <div class="col-lg-4">
+                <aside class="bg-white p-2 p-md-3">
+                    <h3 class="fs-20 text-uppercase text-muted mb-2" th:if="${user != null}" th:text="'Xin chào ' + ${user.fullname}"></h3>
+                    <div class="nav nav-menu flex-column lavalamp" id="sidebar-1" role="tablist">
+                        <a class="nav-link active" th:href="@{/personal/orders}">
+                            <i class="fs-24 icon-box"></i> Đơn hàng
+                        </a>
+                        <a class="nav-link" th:href="@{/personal/profile}">
+                            <i class="fs-24 icon-user"></i> Thông tin tài khoản
+                        </a>
+                        <a class="nav-link" th:href="@{/personal/changepassword}">
+                            <i class="fs-24 icon-lock"></i> Đổi mật khẩu
+                        </a>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-lg-8">
+                <div class="bg-white p-2 p-md-3">
+                    <div class="tab-content" id="myTabContent">
+
+                        <!-- Order_detail Tab -->
+                        <div class="tab-pane fade show active" id="sidebar-1-1" role="tabpanel" aria-labelledby="sidebar-1-1">
+                            <div class="row align-items-end">
+                                <div class="col">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a th:href="@{/personal/orders}">Orders</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page" th:text="${order.orderid}"></li>
+                                        </ol>
+                                    </nav>
+                                    <h2 th:text="'Order ' + ${order.orderid}"></h2>
+                                </div>
+                                <div class="col text-right">
+                                    <a href="#" class="btn btn-outline-primary" th:href="@{/personal/orders }">Quay về</a>
+                                </div>
+                            </div>
+
+                            <!-- don hang -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="bordered p-3">
+                                        <ul class="order-meta">
+                                            <li style="margin-bottom: 30px;">
+                                                <h5  class="order-meta-title">Mã Đơn Hàng</h5>
+                                                <span th:text="${order.orderid}"></span>
+                                            </li >
+                                            <li style="margin-bottom: 30px;">
+                                                <h5 class="order-meta-title">Ngày Đặt Hàng</h5>
+                                                <span th:text="${#temporals.format(order.orderdate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                                            </li>
+                                            <li style="margin-bottom: 30px;">
+                                                <h5 class="order-meta-title">Tổng Số Tiền</h5>
+                                                <span th:text="${order.totalamount}" class="price"></span>
+                                            </li>
+                                            <li >
+                                                <h5 style="margin-top: 30px;" class="order-meta-title">Phương Thức Thanh Toán</h5>
+                                                <span th:text="${order.paymentmethod}"></span>
+                                            </li>
+                                            <li >
+                                                <h5 style="margin-top: 30px;" class="order-meta-title">Trạng Thái Giao Hàng</h5>
+                                                <span th:text="${order.deliverystatus}"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- san pham -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="mb-1 text-uppercase fs-20" th:text="${order.orderProducts.size()} + ' Items'"></h2>
+                                </div>
+                                <div class="col-12">
+                                    <div class="bordered cart-item-list p-3" th:if="${order.orderProducts != null and order.orderProducts.size() > 0}">
+                                            <div class="cart-item" th:each="product : ${order.orderProducts}">
+                                                <a th:href="@{'/product/productdetail/' + ${product.product.productid}}" class="cart-item-image">
+                                                    <img th:src="${product.product.imageurl}" alt="Product Image">
+                                                </a>
+                                                <div class="cart-item-body">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h5 class="cart-item-title" th:text="${product.product.productname}"></h5>
+                                                            <!-- <small class="cart-item-subtitle" th:text="'ID Brand: ' + ${product.product.brandid}"></small> -->
+                                                            <div>
+                                                                <ul class="list list--horizontal list--separated fs-14 text-muted mt-1">
+                                                                    <li>Số lượng  <span th:text="${product.quantity}"></span></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col text-right">
+                                                            <ul class="cart-item-meta">
+                                                                <li class="text-red price quantity-price" th:data-price="${product.product.price}" id="quantity-price" th:text="${product.product.price != null ? product.product.price + ' ₫' : '0 ₫'}"></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div th:if="${order.orderProducts == null or order.orderProducts.size() == 0}">
+                            <p>Không có sản phẩm trong giỏ hàng.</p>
+                        </div>
+
+                            <!-- order total -->
+<!--                             <div class="row">
+                                <div class="col-12">
+                                    <h2 class="text-uppercase fs-20 mb-1">Tổng Đơn Hàng</h2>
+                                </div>
+                                <div class="col-12">
+                                    <div class="bordered p-3">
+                                        <ul class="list-group list-group-minimal">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Số lượng sản phẩm
+                                                <span th:text="${order.totalItems}"></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center text-red">
+                                                Giảm giá
+                                                <span th:text="${order.discount}"></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center text-uppercase font-weight-bold">
+                                                Tổng cần thanh toán
+                                                <span th:text="${order.totalamount}"></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <!-- delivery details -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="mb-1 text-uppercase fs-20">Chi Tiết</h2>
+                                </div>
+                                <div class="col-12">
+                     
+                                    <div class="bordered p-3">
+                                        <h5 class="eyebrow text-muted">Phương Thức Thanh Toán</h5>
+                                        <p class="card-text" th:text="${order.paymentmethod}"></p>
+                                    </div>
+                                    <div class="bordered p-3">
+                                        <h5 class="eyebrow text-muted">Trạng thái thanh toán</h5>
+                                        <p class="card-text" th:text="${order.paymentstatus}"></p>
+                                    </div>
+                                    
+                                    <div class="bordered p-3">
+                                        <h5 class="eyebrow text-muted">Địa chỉ giao hàng</h5>
+                                        <p class="card-text" th:text="${user.address}"></p>
+                                    </div>
+                                    
+                                    <div class="bordered p-3">
+                                        <h5 class="eyebrow text-muted">Trạng thái vận chuyển</h5>
+                                        <p class="card-text" th:text="${order.deliverystatus}"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- footer -->
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

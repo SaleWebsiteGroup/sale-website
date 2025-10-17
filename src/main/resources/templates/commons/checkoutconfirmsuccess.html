@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+<link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+<title th:text="|Đặt hàng thành công|">Đặt hàng thành công</title>
+</head>
+<body class="bg-light">
+    <div th:replace="~{decorator/header :: header}"></div>
+
+    <section class="section-success">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="success-container">
+                        <br><br>
+                        <h1 class="display-1 text-success">Đặt hàng thành công</h1><br>
+                        <h2 th:text="|Cảm ơn bạn đã đặt hàng|">Cảm ơn bạn đã đặt hàng</h2>
+                        <p class="lead" th:text="|Đơn hàng của bạn đã được xác nhận và đang được xử lý. Bạn sẽ nhận được thông báo khi đơn hàng được vận chuyển.|">
+                            Đơn hàng của bạn đã được xác nhận và đang được xử lý. Bạn sẽ nhận được thông báo khi đơn hàng được vận chuyển.
+                        </p>
+                        <br>
+                       
+                        <div class="mt-4">
+                            <a th:href="@{/}" class="btn btn-primary mr-3"
+                                th:text="|Quay lại Trang chủ|">Quay lại Trang chủ</a>
+                            <a th:href="@{/personal/cart}" class="btn btn-secondary"
+                                th:text="|Xem Giỏ hàng|">Xem Giỏ hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{decorator/footer :: footer}"></footer>
+
+    <script th:src="@{/assets/js/vendor.min.js}"></script>
+    <script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

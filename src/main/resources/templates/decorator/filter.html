@@ -1,0 +1,44 @@
+<!-- filter -->
+<aside class="col-lg-3 sidebar" th:fragment="filter" xmlns:th="https://www.thymeleaf.org">
+    <div class="widget">
+        <span class="widget-title">
+            <span th:text="|Bộ lọc|">Bộ lọc</span>
+            <!-- Uncomment this if needed: -->
+            <!-- <a th:href="@{/clear-filters}" class="small text-red" th:text="|clear|">clear</a> -->
+        </span>
+        <div class="accordion" id="accordion-1">
+            <!--<div class="card">
+                <div class="card-header" id="heading-1-1">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
+                            <span th:text="|Thương hiệu|">Thương hiệu</span>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapse-1-1" class="collapse" aria-labelledby="heading-1-1">
+                    <div class="card-body" th:each="brand : ${brands}">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" th:id="'brand-' + ${brand.id}" th:value="${brand.id}" th:name="brands">
+                            <label class="custom-control-label" th:for="'brand-' + ${brand.id}" th:text="${brand.name}">Brand Name</label>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="card">
+                <div class="card-header" id="heading-1-4">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-1-4" aria-expanded="false" aria-controls="collapse-1-4">
+                            <span th:text="|Mức giá|">Mức giá</span>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapse-1-4" class="collapse" aria-labelledby="heading-1-4">
+                    <div class="card-body">
+                        <input type="text" class="rangeslider" name="Range Slider" th:value="${priceRange}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>

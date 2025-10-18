@@ -1,0 +1,30 @@
+<div xmlns:th="https://www.thymeleaf.org">
+<div class="row gutter-1" >
+<div class="row">
+	<th:block th:if="${products != null or !products.isEmpty()}">
+		<div class="col-6 col-md-4" th:fragment="product-listing" th:each="product : ${products}" >
+			<div class="card card-product">
+				<figure class="card-image">
+					<a th:href="@{/product/productdetail/{id}(id=${product.productid})}">
+						<img th:src="@{${product.imageurl}}" alt="Image">
+					</a>
+				</figure>
+				<div class="card-footer">
+					<h3 class="card-title">
+						<a th:href="@{/product/productdetail/{id}(id=${product.productid})}"
+						   th:text="${product.productname}"></a>
+					</h3>
+					<span class="brand" th:text="${product.brand}"></span>
+					<span class="price text-red" th:text="${product.price}"></span>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<th:block th:if="${products == null or products.isEmpty()}">
+		<div class="col-12">
+			<p class="text-center">Không có sản phẩm nào để hiển thị.</p>
+		</div>
+	</th:block>
+</div>
+</div>
+</div>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+  <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+  <title th:text="|Thương hiệu Yves Saint Laurent|">Thương hiệu Yves Saint Laurent</title>
+</head>
+<body>
+
+<header th:replace="~{decorator/header :: header}"></header>
+
+<section style="padding: 2.5rem 0;"></section>
+
+<!-- breadcrumbs -->
+<section class="breadcrumbs bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="|YSL|">YSL</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- listing -->
+<section class="pt-6">
+  <div class="container">
+
+    <div class="row gutter-4">
+
+      <!-- bo loc -->
+      <div th:replace="~{decorator/filter :: filter}"></div>
+
+      <!-- content -->
+      <div class="col-lg-9">
+        <div class="row gutter-1 align-items-end">
+          <div class="col-md-6">
+            <h1 th:text="|Yves Saint Laurent|">Yves Saint Laurent</h1>
+          </div>
+          <div th:replace="~{decorator/sortby :: sortby}"></div>
+        </div>
+
+        <div class="row gutter-1">
+          <div th:replace="~{decorator/product-listing :: product-listing}"></div>
+        </div>
+
+        <div th:replace="~{decorator/paging :: paging}"></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

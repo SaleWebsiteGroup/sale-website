@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" th:href="@{/assets/css/vendor.css}" />
+	<link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+
+	<title th:text="'Đăng ký'"></title>
+</head>
+<body class="bg-light">
+
+<div th:replace="~{decorator/header :: header}"></div>
+
+<!-- register -->
+<section class="sectionlog">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-4">
+				<div class="card boxed">
+					<div class="card-header">
+						<ul class="nav nav-tabs nav-fill card-header-tabs lavalamp"
+							id="component-1" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#component-1-1"
+								   role="tab" aria-controls="component-1-1" aria-selected="true"
+								   th:text="'Đăng ký'"></a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/register}" method="post">
+							<div th:if="${message}" class="alert alert-danger">
+								<span th:text="${message}"></span>
+							</div>
+							<div class="tab-content" id="component-1-content">
+								<div class="tab-pane fade show active" id="component-1-1" role="tabpanel" aria-labelledby="component-1-1">
+									<div class="row gutter-2">
+										<div class="col-12">
+											<fieldset>
+												<div class="row">
+													<div class="col-12">
+														<div class="form-label-group">
+															<input type="text" id="inputName" th:name="username" th:value="${username}" class="form-control form-control-lg" placeholder="Tên tài khoản" required>
+															<label for="inputName" th:text="'Tên tài khoản'"></label>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12">
+														<div class="form-label-group">
+															<input type="password" id="inputPassword" th:name="password" th:value="${password}" class="form-control form-control-lg" placeholder="Mật khẩu" required>
+															<label for="inputPassword" th:text="'Mật khẩu'"></label>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12">
+														<div class="form-label-group">
+															<input type="text" id="inputFullName" th:name="fullname" th:value="${fullname}" class="form-control form-control-lg" placeholder="Họ và tên" required>
+															<label for="inputFullName" th:text="'Họ và tên'"></label>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12">
+														<div class="form-label-group">
+															<input type="text" id="inputPhone" th:name="phonenumber" th:value="${phonenumber}" class="form-control form-control-lg" placeholder="Số điện thoại" required>
+															<label for="inputPhone" th:text="'Số điện thoại'"></label>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12">
+														<div class="form-label-group">
+															<input type="email" id="inputEmail" th:name="email" th:value="${email}" class="form-control form-control-lg" placeholder="Email" required>
+															<label for="inputEmail" th:text="'Email'"></label>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12">
+														<div class="form-label-group">
+															<input type="text" id="inputAddress" th:name="address" th:value="${address}" class="form-control form-control-lg" placeholder="Địa chỉ" required>
+															<label for="inputAddress" th:text="'Địa chỉ'"></label>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+
+										<div class="col-12">
+											<div class="custom-control custom-checkbox mt-1">
+												<input type="checkbox" id="customCheckbox1" th:name="argeement" th:value="true" class="custom-control-input">
+												<label class="custom-control-label text-muted" for="customCheckbox1">
+													<span th:text="'Yes, I agree to the '"></span>
+													<a th:href="@{#!}" class="underline" th:text="'Terms and Conditions'"></a>
+												</label>
+											</div>
+											
+										</div>
+										<div class="col-12">
+											<button type="submit" class="btn btn-primary btn-block" th:text="'Đăng ký'"></button>
+										</div>
+										<div class="col-12 text-center mt-1">
+												<span>Đã có tài khoản? </span> 
+												<a th:href="@{/login}" class="text-decoration-none" th:text="'Đăng nhập'"></a>
+											</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- footer -->
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

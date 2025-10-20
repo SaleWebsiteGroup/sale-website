@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" th:href="@{/assets/css/vendor.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+
+<title th:text="${products.productname}"></title>
+</head>
+<body>
+
+	<header th:replace="~{decorator/header :: header}"></header>
+
+	<section style="padding: 2.5rem 0;"></section>
+
+	<!-- breadcrumbs -->
+	<section class="breadcrumbs bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a th:href="@{/home}"
+								th:text="'Trang chủ'"></a></li>
+							<li class="breadcrumb-item active" aria-current="page"
+								th:text="${products.productname}"></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- product -->
+	<section class="hero">
+		<div class="container">
+			<div class="row gutter-2 gutter-md-4 justify-content-between">
+				<input name="idproduct" th:value="${products.productid}"
+					hidden="true">
+				<div class="col-lg-7">
+					<div class="row gutter-1 justify-content-between">
+						<div class="col-lg-10 order-lg-2">
+							<div class="owl-carousel owl-carousel--alt gallery"
+								data-margin="0" data-slider-id="1" data-thumbs="true"
+								data-nav="true">
+								<a class="cart-item-image"><img
+									th:src="${products.imageurl}" alt="Image"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-5 mb-lg-0">
+					<div class="row">
+						<div class="col-12">
+							<span class="eyebrow text-muted" th:text="${products.brand}"></span>
+							<h1 th:text="${products.productname}"></h1>
+						</div>
+						<div class="col-12">
+							<div th:if="${messageDanger}" class="alert alert-danger">
+								<span th:text="${messageDanger}"></span>
+							</div>
+							<div th:if="${messageSuccess}" class="alert alert-success">
+								<span th:text="${messageSuccess}"></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- description -->
+					<div class="row gutter-2">
+						<div class="col-12">
+							<div class="accordion" id="accordion-1">
+								<div class="card">
+									<div class="card-header" id="heading-1-1">
+										<h5 class="mb-0">
+											<button class="btn btn-link" type="button"
+												data-toggle="collapse" data-target="#collapse-1-1"
+												aria-expanded="false" aria-controls="collapse-1-1">
+												Mô tả</button>
+										</h5>
+									</div>
+									<div id="collapse-1-1" class="collapse"
+										aria-labelledby="heading-1-1" data-parent="#accordion-1">
+										<div class="card-body">
+											<p th:text="${products.description}"></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion" id="accordion-2">
+								<div class="card active">
+									<div class="card-header" id="heading-1-2">
+										<h5 class="mb-0">
+											<button class="btn btn-link" type="button"
+												data-toggle="collapse" data-target="#collapse-1-2"
+												aria-expanded="true" aria-controls="collapse-1-2">
+												Chi tiết sản phẩm</button>
+										</h5>
+									</div>
+									<div id="collapse-1-2" class="collapse show"
+										aria-labelledby="heading-1-2" data-parent="#accordion-2">
+										<div class="card-body">
+											<p class="product-info">
+												<strong>Mã sản phẩm : </strong><span
+													th:text="${products.productid}"></span>
+											</p>
+											<p class="product-info">
+												<strong>Danh mục : </strong><span
+													th:text="${products.category}"></span>
+											</p>
+											<p class="product-info">
+												<strong>Nhà cung cấp : </strong><span
+													th:text="${products.supplier}"></span>
+											</p>
+											<p class="product-info">
+												<strong>Thương hiệu : </strong><span
+													th:text="${products.brand}"></span>
+											</p>
+											<p class="product-info">
+												<strong>Số lượng trong kho : </strong><span
+													th:text="${products.stockquantity}"></span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<strong>Tình trạng : <span style="color: #3eb846;">Còn
+									hàng </span>
+							</strong>
+						</div>
+						<div class="col-12">
+							<strong>Số lượng : <span class="dYBF91"
+								style="display: inline-flex; align-items: center;">
+									<button type="button" class="aGq8SN" aria-label="Decrease">-</button>
+									<input class="aGq8SN jKOh4z quantity-input" type="number" id="quantity-input"
+									value="1" min="1" max="100" step="1"
+									style="width: 50px; text-align: center;">
+									<button type="button" class="aGq8SN" aria-label="Increase">+</button>
+							</span>
+							</strong>
+						</div>
+						<div class="col-12">
+							<span class="price text-red"
+								style="font-size: 20px; color: red; font-weight: bold;">
+								<bdi th:text="${products.price}"></bdi>
+							</span>
+						</div>
+						<div class="col-12">
+							<a
+								href="javascript:void(0);" 
+								class="btn btn-block btn-primary" th:text="'Thêm vào giỏ hàng'" onclick="addToCart()"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+	<script th:src="@{/assets/js/vendor.min.js}"></script>
+	<script th:src="@{/assets/js/app.js}"></script>
+	<script>
+	function addToCart() {
+		const quantity = document.getElementById('quantity-input').value;
+	    const productId = document.querySelector('input[name="idproduct"]').value; 
+	    window.location.href = `/personal/cart/add/${productId}?quantity=${quantity}`;
+	}
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Tăng số lượng
+        document.querySelectorAll('.aGq8SN[aria-label="Increase"]').forEach(function (increaseBtn) {
+            increaseBtn.addEventListener("click", function () {
+                const quantityInput = this.parentElement.querySelector('.quantity-input');
+                const max = parseInt(quantityInput.getAttribute("max")) || Infinity;
+                let value = parseInt(quantityInput.value) || 1;
+
+                if (value < max) {
+                    quantityInput.value = value + 1;
+                }
+            });
+        });
+
+        // Giảm số lượng
+        document.querySelectorAll('.aGq8SN[aria-label="Decrease"]').forEach(function (decreaseBtn) {
+            decreaseBtn.addEventListener("click", function () {
+                const quantityInput = this.parentElement.querySelector('.quantity-input');
+                const min = parseInt(quantityInput.getAttribute("min")) || 1;
+                let value = parseInt(quantityInput.value) || 1;
+
+                if (value > min) {
+                    quantityInput.value = value - 1;
+                }
+            });
+        });
+
+        // Kiểm tra giá trị thủ công từ người dùng
+        document.querySelectorAll('.quantity-input').forEach(function (input) {
+            input.addEventListener("input", function () {
+                const min = parseInt(this.getAttribute("min")) || 1;
+                const max = parseInt(this.getAttribute("max")) || Infinity;
+                let value = parseInt(this.value) || min;
+
+                if (value < min) {
+                    this.value = min;
+                } else if (value > max) {
+                    this.value = max;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

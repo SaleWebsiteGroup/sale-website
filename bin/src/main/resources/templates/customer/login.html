@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/vendor.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <title>Đăng nhập</title>
+  </head>
+  <body class="bg-light">
+
+	<div th:replace="home/header :: header"></div>
+  
+    <!-- login -->
+    <section class="sectionlog">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            <div class="card boxed">
+              <div class="card-header">
+                <ul class="nav nav-tabs nav-fill card-header-tabs lavalamp" id="component-1" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#component-1-1" role="tab" aria-controls="component-1-1" aria-selected="false">Đăng nhập</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content" id="component-1-content">
+                  <div class="tab-pane fade show active" id="component-1-1" role="tabpanel" aria-labelledby="component-1-1">
+                    <div class="row gutter-2">
+                      <div class="col-12">
+                        <fieldset>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="form-label-group">
+                                <input type="text" id="inputEmail" class="form-control form-control-lg" placeholder="Email address" required="">
+                                <label for="inputEmail">Email/SĐT</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="form-label-group">
+                                <input type="text" id="inputPassword" class="form-control form-control-lg" placeholder="Password" required="">
+                                <label for="inputPassword">Mật khẩu</label>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                      </div>
+                      <div class="col-12 text-center">
+                        <a href="" class="underline fs-14">Quên mật khẩu ?</a>
+                      </div>
+                      <div class="col-12">
+                        <a href="" class="btn btn-primary btn-block">Đăng nhập</a>
+                      </div>
+                    </div>
+                    </div>
+                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+ <!-- footer -->
+    <footer class="bg-dark pb-0 text-white">
+      <div class="container">
+        <div class="row justify-content-md-between gutter-2">
+
+          <!-- menu -->
+          <div class="order-1 col-md-8 col-lg-4">
+            <div class="row">
+              <div class="col">
+                <h4 class="eyebrow mb-1">BB Perfume</h4>
+                <ul class="menu-list">
+                  <li class="menu-list-item"><a href="" class="menu-list-link">Liên hệ</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <h4 class="eyebrow mb-1">Hỗ trợ</h4>
+                <ul class="menu-list">
+               	 <li class="menu-list-item"><a href="" class="menu-list-link">Cách thức mua hàng</a></li>
+                  <li class="menu-list-item"><a href="" class="menu-list-link">Hướng dẫn đặt hàng</a></li>
+                  <li class="menu-list-item"><a href="" class="menu-list-link">Phương thức thanh toán</a></li>
+                  <li class="menu-list-item"><a href="" class="menu-list-link">Theo dõi đơn hàng</a></li>       
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- subscribe -->
+          <div class="order-2 order-md-3 order-lg-2 col-md-8 col-lg-4">
+            <h4 class="eyebrow mb-1">Kết nối cùng BBPerfume</h4>
+            <div>
+            <ul class="list list--horizontal">
+              <li><a href="#!" class="text-hover-facebook"><i class="fs-28 icon-facebook-square-brands"></i></a></li>
+              <li><a href="#!" class="text-hover-instagram"><i class="fs-28 icon-instagram-square-brands"></i></a></li>
+            </ul>
+            </div>
+          </div>
+
+          <!-- settings -->
+          <div class="order-3 order-md-2 order-lg-3 col-md-4 col-lg-3">
+            <h4 class="eyebrow mb-1">Thanh toán</h4>
+            <div></div>
+            <ul class="list list--horizontal">
+              <li><img src="assets/images/demo/visa-1.svg" class="payment" alt="Image"></li>
+              <li><img src="assets/images/demo/master-card-1.svg" class="payment" alt="Image"></li>
+              <li><img src="assets/images/demo/amex-1.svg" class="payment" alt="Image"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-transparent mt-8 py-2">
+        <div class="container">
+          <div class="row align-items-center gutter-1">
+            <div class="col-md-8">
+              <p class="small text-muted"> Bản quyền nội dung thuộc về &copy; 2023 BBPerfume</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+   
+    <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

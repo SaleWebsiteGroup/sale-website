@@ -1,0 +1,103 @@
+	<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+<link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+<title th:text="|Đăng nhập|">Đăng nhập</title>
+</head>
+<body class="bg-light">
+
+	<div th:replace="~{decorator/header :: header}"></div>
+
+	<!-- login -->
+	<section class="sectionlog">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-4">
+					<div class="card boxed">
+						<div class="card-header">
+							<ul class="nav nav-tabs nav-fill card-header-tabs lavalamp"
+								id="component-1" role="tablist">
+								<li class="nav-item"><a class="nav-link active"
+									data-toggle="tab" href="#component-1-1" role="tab"
+									aria-controls="component-1-1" aria-selected="true"
+									th:text="|Đăng nhập|">Đăng nhập</a></li>
+							</ul>
+						</div>
+						<div class="card-body">
+							<form th:action="@{/login}" method="POST">
+								<div th:if="${param.error}" class="alert alert-danger">
+									<span>Thông tin đăng nhập không đúng. Vui lòng thử lại.</span>
+								</div>
+								<div class="tab-content" id="component-1-content">
+									<div class="tab-pane fade show active" id="component-1-1"
+										role="tabpanel" aria-labelledby="component-1-1">
+										<div class="row gutter-2">
+											<div class="col-12">
+												<fieldset>
+													<div class="row">
+														<div class="col-12">
+															<div class="form-label-group">
+																<input type="text" id="inputEmail" name="username"
+																	class="form-control form-control-lg"
+																	placeholder="Email address" required="required"
+																	th:placeholder="|Email/SĐT|"> <label
+																	for="inputEmail" th:text="|Username|">Username</label>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-12">
+															<div class="form-label-group">
+																<input type="password" id="inputPassword"
+																	name="password" class="form-control form-control-lg"
+																	placeholder="Password" required="required"
+																	th:placeholder="|Mật khẩu|"> <label
+																	for="inputPassword" th:text="|Mật khẩu|">Mật
+																	khẩu</label>
+															</div>
+														</div>
+													</div>
+												</fieldset>
+											</div>
+											<div class="col-12 text-center">
+												<a th:href="@{/forgotpass}" class="underline fs-14"
+													th:text="|Quên mật khẩu ?|">Quên mật khẩu ?</a>
+											</div>
+											<div class="col-12">
+												<button type="submit" class="btn btn-primary btn-block"
+													th:text="|Đăng nhập|"></button>
+											</div>
+											<div class="col-12 text-center mt-1">
+												<span>Chưa có tài khoản? </span> <a th:href="@{/register}"
+													class="text-decoration-none">Đăng ký</a>
+											</div>
+											<div class="col-12 mt-2">
+  												<a class="social-btn" th:href="@{https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8082/login/login-google&response_type=code&client_id=726840502405-ku83nqlkgai2spfavg4e6oeu6k57cnur.apps.googleusercontent.com&approval_prompt=force}">
+													<img th:src="@{https://auth.openai.com/assets/google-logo-NePEveMl.svg}" class="google-logo" th:alt="'Google logo'" />
+													<span style="margin-left: -40px;" th:text="'Đăng nhập với Google'"></span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+	<script th:src="@{/assets/js/vendor.min.js}"></script>
+	<script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

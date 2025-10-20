@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+	<link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+	<title th:text="'Thông tin tài khoản'"></title>
+</head>
+<body class="bg-light">
+
+<!-- header -->
+<div th:replace="~{decorator/header :: header}"></div>
+
+<!-- content -->
+<section>
+	<div class="container">
+		<div class="row gutter-1 gutter-md-2">
+			<div class="col-lg-4">
+				<aside class="bg-white p-2 p-md-3">
+					<h3 class="fs-20 text-uppercase text-muted mb-2" th:text="'Xin chào ' + ${user.fullname}"></h3>
+					<div class="nav nav-menu flex-column lavalamp" id="sidebar-1" role="tablist">
+						<a class="nav-link "  th:href="@{/personal/orders}" ><i class="fs-24 icon-box"></i> Đơn hàng</a>
+						<a class="nav-link active"  th:href="@{/personal/profile}"  ><i class="fs-24 icon-user"></i> Thông tin tài khoản </a>
+						<a class="nav-link "  th:href="@{/personal/changepassword}" ><i class="fs-24 icon-lock"></i> Đổi mật khẩu</a>
+					</div>
+				</aside>
+			</div>
+
+			<div class="col-lg-8">
+				<div class="bg-white p-2 p-md-3">
+					<div class="tab-content" id="myTabContent">
+
+						<!-- Personal Data Tab -->
+						<div class="tab-pane fade show active" id="sidebar-1-2" role="tabpanel" aria-labelledby="sidebar-1-2">
+							<div class="row">
+								<div class="col">
+									<h2>Thông tin tài khoản</h2>
+								</div>
+							</div>
+							<div th:if="${messageDanger}" class="alert alert-danger">
+								<span th:text="${messageDanger}"></span>
+							</div>
+							<div th:if="${messageSuccess}" class="alert alert-success">
+								<span th:text="${messageSuccess}"></span>
+							</div>
+
+							<!-- Check if user data exists -->
+							<div th:if="${user != null}">
+								<form th:action="@{/personal/profile/update}" method="post">
+									<input hidden="true" id="id" name="id" th:value="${user.id}">
+									<!-- Username -->
+									<fieldset class="mb-2">
+										<div class="row">
+											<div class="col-12">
+												<div class="form-label-group">
+													<input type="text" id="inputUsername" name="username" class="form-control form-control-lg" placeholder="Username" readonly th:value="${user.username}">
+													<label for="inputUsername">Tên người dùng</label>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+
+									<!-- Full Name -->
+									<fieldset class="mb-2">
+										<div class="row">
+											<div class="col-12">
+												<div class="form-label-group">
+													<input type="text" id="inputFullName" name="fullname" class="form-control form-control-lg" placeholder="Full Name" required th:value="${user.fullname}">
+													<label for="inputFullName">Họ và tên</label>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+
+									<!-- Email -->
+									<fieldset class="mb-2">
+										<div class="row">
+											<div class="col-12">
+												<div class="form-label-group">
+													<input type="email" id="inputEmail" name="email" class="form-control form-control-lg" placeholder="Email Address" required th:value="${user.email}">
+													<label for="inputEmail">Email</label>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+
+									<!-- Address -->
+									<fieldset class="mb-2">
+										<div class="row">
+											<div class="col-12">
+												<div class="form-label-group">
+													<input type="text" id="inputAddress" name="address" class="form-control form-control-lg" placeholder="Address" th:value="${user.address}">
+													<label for="inputAddress">Địa chỉ</label>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+
+									<!-- Phone Number -->
+									<fieldset class="mb-2">
+										<div class="row">
+											<div class="col-12">
+												<div class="form-label-group">
+													<input type="text" id="inputPhoneNumber" name="phonenumber" class="form-control form-control-lg" placeholder="Phone Number" th:value="${user.phonenumber}">
+													<label for="inputPhoneNumber">Số điện thoại</label>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+
+									<!-- Role -->
+									<fieldset class="mb-2" th:if="${user.role != null}">
+										<div class="row">
+											<div class="col-12">
+												<div class="form-label-group">
+													<input type="text" id="inputRole" class="form-control form-control-lg" placeholder="Role" readonly th:value="${user.role.rolename}">
+													<label for="inputRole">Vai trò</label>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+
+									<!-- Submit Button -->
+									<div class="row">
+										<div class="col">
+											<button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<!-- If no user data -->
+							<div th:if="${user == null}">
+								<p>Chưa có thông tin user</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- footer -->
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

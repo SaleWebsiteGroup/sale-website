@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+    <title th:text="'Đơn hàng'"></title>
+</head>
+<body class="bg-light">
+
+<!-- header -->
+<div th:replace="~{decorator/header :: header}"></div>
+
+<!-- content -->
+<section>
+    <div class="container">
+        <div class="row gutter-1 gutter-md-2">
+            <div class="col-lg-4">
+                <aside class="bg-white p-2 p-md-3">
+                    <h3 class="fs-20 text-uppercase text-muted mb-2" th:if="${user != null}" th:text="'Xin chào ' + ${user.fullname}"></h3>
+                    <div class="nav nav-menu flex-column lavalamp" id="sidebar-1" role="tablist">
+                        <a class="nav-link active"  th:href="@{/personal/orders}" >
+                            <i class="fs-24 icon-box"></i> Đơn hàng
+                        </a>
+                        <a class="nav-link "  th:href="@{/personal/profile}" >
+                            <i class="fs-24 icon-user"></i> Thông tin tài khoản
+                        </a>
+                        <a class="nav-link "  th:href="@{/personal/changepassword}" >
+                            <i class="fs-24 icon-lock"></i> Đổi mật khẩu
+                        </a>
+                    </div>
+                </aside>
+            </div>
+
+            <!--Đơn hàng-->
+            <div class="col-lg-8">
+                <div class="bg-white p-2 p-md-3">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="sidebar-1-1" role="tabpanel" aria-labelledby="sidebar-1-1" >
+                            <div class="row">
+                                <div class="col">
+                                    <h2>Đơn hàng</h2>
+                                </div>
+                            </div>
+
+                            <div class="row gutter-2" th:if="${orderPage != null and !orderPage.isEmpty()}">
+                                <div class="col-12" th:each="order : ${orderPage.content}">
+                                    <div class="card card-data bordered">
+                                        <div class="card-header">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <h2 class="card-title fs-18">
+                                                        <a th:text="'Đơn hàng ' + ${order.orderid}"></a>
+                                                    </h2>
+                                                </div>
+                                                <div class="col text-right">
+                                        <span class="dropdown">
+                                            <button class="btn btn-lg btn-white btn-ico" id="dropdown-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">
+                                                <i class="icon-more-vertical"></i>
+                                            </button>
+                                            <span class="dropdown-menu" aria-labelledby="dropdown-1">
+                                                <a class="dropdown-item" th:href="@{/personal/orderdetail/{id}(id=${order.orderid})}">Chi tiết đơn hàng</a>
+                                            </span>
+                                        </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="order-preview">
+                                                <li th:if="${order.orderProducts != null and order.orderProducts.size() > 0}" th:each="orderProduct : ${order.orderProducts}">
+                                                    <a th:href="@{'/product/productdetail/' + ${orderProduct.product.productid}}" th:title="${orderProduct.product.productname}">
+                                                        <img th:src="${orderProduct.product.imageurl}" th:alt="${orderProduct.product.productname}">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="order-meta">
+                                                <li>
+                                                    <h5 class="order-meta-title">Mã Đơn Hàng</h5>
+                                                    <span th:text="${order.orderid}"></span>
+                                                </li>
+                                                <li>
+                                                    <h5 class="order-meta-title">Ngày Đặt Hàng</h5>
+                                                    <span th:text="${#temporals.format(order.orderdate, 'dd-MM-yyyy HH:mm')}"></span>
+                                                </li>
+                                                <li>
+                                                    <h5 class="order-meta-title">Tổng Số Tiền</h5>
+                                                    <span th:text="${#numbers.formatDecimal(order.totalamount, 0, 'COMMA', 0, 'POINT')} + ' ₫'"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Phân trang -->
+                                <div class="col-12 mt-3">
+                                    <nav aria-label="Page navigation" th:if="${orderPage.totalPages > 1}">
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item" th:classappend="${orderPage.isFirst()} ? 'disabled'">
+                                                <a class="page-link" th:href="@{/personal/orders(page=${orderPage.number - 1}, size=${orderPage.size})}">Trước</a>
+                                            </li>
+                                            <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, orderPage.totalPages - 1)}" th:classappend="${pageNumber == orderPage.number} ? 'active'">
+                                            <a class="page-link" th:href="@{/personal/orders(page=${pageNumber}, size=${orderPage.size})}" th:text="${pageNumber + 1}"></a>
+                                            </li>
+                                            <li class="page-item" th:classappend="${orderPage.isLast()} ? 'disabled'">
+                                                <a class="page-link" th:href="@{/personal/orders(page=${orderPage.number + 1}, size=${orderPage.size})}">Sau</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                            </div>
+
+                            <div class="text-center p-3" th:if="${orderPage == null or orderPage.isEmpty()}">
+                                <p>Bạn chưa có đơn hàng nào.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- footer -->
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

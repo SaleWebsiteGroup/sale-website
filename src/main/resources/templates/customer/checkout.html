@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/assets/css/vendor.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+
+    <title th:text="'Thanh toán'"></title>
+</head>
+<body class="bg-light">
+
+<header th:replace="~{decorator/header :: header}"></header>
+
+<!-- checkout -->
+<section class="sectionCart">
+<form action="/personal/checkout" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 th:text="'Thanh toán'"></h1>
+            </div>
+        </div>
+        <div class="row gutter-1">
+
+            <div class="col">
+                <!-- address -->
+                <div class="bg-white p-2 p-lg-3 mb-1">
+                    <div class="row gutter-1 align-items-center">
+                        <div class="col-md-6">
+                            <h2 class="text-uppercase fs-20" th:text="'Thông Tin Giao Hàng'"></h2>
+                        </div>
+                    </div>
+
+                    <fieldset class="mb-2">
+                    	<input hidden="true" name ="userid" id="userid" th:value="user.id">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-label-group">
+                                    <input type="text" id="inputFullName" th:value="${user.fullname}" class="form-control form-control-lg" th:placeholder="'Họ và Tên'" required="" readonly="true">
+                                    <label for="inputFullName" th:text="'Họ và Tên'"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-label-group">
+                                    <input type="text" id="inputAddress" th:value="${user.address}" class="form-control form-control-lg" th:placeholder="'Địa Chỉ'" required="" readonly="true">
+                                    <label for="inputAddress" th:text="'Địa Chỉ'"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-label-group">
+                                    <input type="email" id="inputEmail" th:value="${user.email}" class="form-control form-control-lg" th:placeholder="'Email'" required="" readonly="true">
+                                    <label for="inputEmail" th:text="'Email'"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-label-group">
+                                    <input type="text" id="inputPhoneNumber" th:value="${user.phonenumber}" class="form-control form-control-lg" th:placeholder="'Số Điện Thoại'" required="" readonly="true">
+                                    <label for="inputPhoneNumber" th:text="'Số Điện Thoại'"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- delivery options -->
+                <div class="bg-white p-2 p-lg-3 mb-1">
+                    <h2 class="mb-3 text-uppercase fs-20" th:text="'Phương Thức Giao Hàng'"></h2>
+                    <div class="custom-control custom-choice">
+                        <input type="radio" name="choice-shipping" class="custom-control-input" id="custom-choice-1" th:value="'standard'" th:checked="true">
+                        <label class="custom-control-label text-dark d-flex justify-content-between align-items-center" for="custom-choice-1">
+                            <span>
+                                <h4 class="custom-choice-title" th:text="'Tiêu Chuẩn'"></h4>
+                                <span class="text-muted fs-14" th:text="'Dự kiến: 3-5 ngày làm việc'"></span>
+                            </span>
+                            <span class="text-uppercase" th:text="'Miễn Phí'"></span>
+                        </label>
+                    </div>
+                   
+                </div>
+
+                <!-- payment -->
+                <div class="bg-white p-2 p-lg-3 mb-1">
+                    <h2 class="mb-2 text-uppercase fs-20">Thanh Toán</h2>
+
+                    <fieldset class="mb-2">
+                        <div class="row">
+                            <div class="col">
+                                <div class="select-frame">
+                                    <select class="custom-select custom-select-lg" th:name="paymentmethod" id="customPayment">
+                                        <option value="Tiền mặt">Thanh Toán Khi Nhận Hàng</option>
+                                        <option value="Chuyển khoản">Thanh Toán Bằng Mã QR</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+
+                <!-- place order -->
+                <div >
+                    <button type="submit" name="submit" th:value="confirm"  class="btn btn-lg btn-primary btn-block mb-2" th:text="'Hoàn Tất Đơn Hàng'"></button>
+                    <small class="text-muted" th:text="'Bằng cách đặt hàng, bạn đồng ý với '"></small>
+                    <a th:href="@{/terms}" th:text="'Điều Khoản & Điều Kiện'"></a>
+                    <small class="text-muted" th:text="', chính sách bảo mật và đổi trả của chúng tôi. Dữ liệu của bạn sẽ được lưu trữ để cải thiện trải nghiệm mua sắm trong tương lai.'"></small>
+                </div>
+            </div>
+
+            <!-- order total -->
+            <aside class="col-lg-5">
+                <div class="bg-white p-2 p-lg-3">
+                    <h2 class="mb-3 text-uppercase fs-20">Order total</h2>
+
+				
+				<div th:if="${message}" class="alert alert-info">
+									<span th:text="${message}"></span>
+								</div>
+								
+								<div th:if="${messageDanger}" class="alert alert-danger">
+									<span th:text="${messageDanger}"></span>
+								</div>
+								
+								
+                    <!-- Duyệt qua các sản phẩm trong giỏ hàng -->
+                    <div class="cart-item" th:if="${usercart != null}" th:each="cart : ${usercart}">
+                        <a th:href="@{#!}" class="cart-item-image">
+                            <img th:src="${cart.imageurl}" alt="Image">
+                        </a>
+                        <div class="cart-item-body">
+                            <div class="row">
+                                <div class="col-9">
+                                	<input th:value="${cart.productid}" hidden="true" name="listcheckout">
+                                    <h5 class="cart-item-title" th:text="${cart.productname}"></h5>
+                                    <ul class="list list--horizontal fs-14">
+                                        <li class="text-red price" th:text="${cart.price != null ? cart.price + ' ₫' : '0 ₫'}"></li>
+                                    </ul>
+                                </div>
+                               </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-3"/>
+                    <!-- Áp dụng mã giảm giá -->
+                    <div class="input-combined mb-2" th:fragment="total_order">
+                        <input type="text" class="form-control" placeholder="Mã giảm giá" th:value="${voucher}" name="voucher" id="promoCode" aria-label="Promo code" aria-describedby="button-addon2">
+                        <button class="btn btn-white" type="submit" id="button-addon2" name="submit" th:value="voucher" onclick="applyPromoCode()" th:text="|Áp dụng|">Áp dụng</button>
+                        <span class="input-combined_indicator"></span>
+                    </div>
+
+                    <!-- Hiển thị các giá trị tổng đơn hàng -->
+                    <ul class="list-group list-group-minimal mb-3" th:fragment="total_order">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tạm tính
+                            <span id="subtotal" class="price" th:text="${previosprice}">0 ₫</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Phí vận chuyển
+                            <span id="shipping" class="price" >0 ₫</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Giảm giá
+                            <span id="discount" class="price" th:text="${discount}">0 ₫</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center text-uppercase font-weight-bold">
+                            Tổng thanh toán
+                            <span id="total" class="price text-red" th:text="${totalamount}">0 ₫</span>
+                            <input id="totalamount" hidden="true" name= "totalamount" th:value="${totalamount}">
+                        </li>
+                    </ul>
+                    
+				
+                </div>
+            </aside>
+        </div>
+    </div>
+    </form>
+</section>
+
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+
+</body>
+</html>

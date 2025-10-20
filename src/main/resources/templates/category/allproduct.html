@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+    <title th:text="|Tất cả sản phẩm|"></title>
+</head>
+<body>
+
+<header th:replace="~{decorator/header :: header}"></header>
+
+<section style="padding: 2.5rem 0;"></section>
+
+<!-- breadcrumbs -->
+<section class="breadcrumbs bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="@{/home}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- listing -->
+<section class="pt-6">
+    <div class="container">
+        <div class="row gutter-4">
+
+            <!-- bo loc -->
+            <div th:replace="~{decorator/filter :: filter}"></div>
+
+            <!-- content -->
+            <div class="col-lg-9">
+                <div class="row gutter-1 align-items-end">
+                    <div class="col-md-6">
+                        <h1 th:text="|Tất cả sản phẩm|"></h1>
+                    </div>
+
+                    <!-- Sort by -->
+                    <div class="col-md-6 text-md-right" th:fragment="sortby" xmlns:th="https://www.thymeleaf.org">
+                        <ul class="list list--horizontal list--separated text-muted fs-14">
+                            <li>
+                                <span>Sắp xếp theo
+                                    <span class="dropdown">
+                                        <a class="dropdown-toggle underline" role="button" id="dropdownMenuLink"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                           th:text="${currentSort == 'priceDesc'} ? 'Giá giảm dần' :
+                                                    (${currentSort == 'priceAsc'} ? 'Giá tăng dần' : 'Phổ biến')">
+                                        </a>
+                                        <span class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" th:href="@{/product/allproduct(sort='default', page=0)}">Phổ biến</a>
+                                            <a class="dropdown-item" th:href="@{/product/allproduct(sort='priceAsc', page=0)}">Giá tăng dần</a>
+                                            <a class="dropdown-item" th:href="@{/product/allproduct(sort='priceDesc', page=0)}">Giá giảm dần</a>
+                                        </span>
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Danh sách sản phẩm -->
+                <div class="row gutter-1">
+
+                    <div class="col-12" th:if="${#lists.isEmpty(allProductPage.content)}">
+                        <p class="text-center">Không tìm thấy sản phẩm nào.</p>
+                    </div>
+
+                    <th:block th:if="${not #lists.isEmpty(allProductPage.content)}">
+                        <div class="col-6 col-md-4" th:each="product : ${allProductPage.content}">
+                            <div class="card card-product">
+                                <figure class="card-image">
+                                    <a th:href="@{/product/productdetail/{id}(id=${product.productid})}">
+                                        <img th:src="@{${product.imageurl}}" alt="Product Image">
+                                    </a>
+                                </figure>
+                                <div class="card-footer">
+                                    <h3 class="card-title">
+                                        <a th:href="@{/product/productdetail/{id}(id=${product.productid})}"
+                                           th:text="${product.productname}"></a>
+                                    </h3>
+                                    <span class="brand" th:text="${product.brand}"></span>
+                                    <span class="price text-red" th:text="${product.price}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+
+                <!-- Phân trang -->
+                <div class="row mt-4">
+                    <div class="col">
+                        <nav aria-label="Page navigation" th:if="${allProductPage.totalPages > 1}">
+                            <ul class="pagination justify-content-center">
+                                <!-- Nút "Trước" -->
+                                <li class="page-item" th:classappend="${allProductPage.first} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/product/allproduct(page=${allProductPage.number - 1}, sort=${currentSort})}">
+                                        Trước
+                                    </a>
+                                </li>
+
+                                <!-- Các số trang -->
+                                <li class="page-item"
+                                    th:each="pageNumber : ${#numbers.sequence(0, allProductPage.totalPages - 1)}"
+                                    th:classappend="${pageNumber == allProductPage.number} ? 'active'">
+                                    <a class="page-link"
+                                       th:href="@{/product/allproduct(page=${pageNumber}, sort=${currentSort})}"
+                                       th:text="${pageNumber + 1}"></a>
+                                </li>
+
+                                <!-- Nút "Sau" -->
+                                <li class="page-item" th:classappend="${allProductPage.last} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/product/allproduct(page=${allProductPage.number + 1}, sort=${currentSort})}">
+                                        Sau
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!-- header -->
+<header class="header header-absolute" th:fragment="topbar&header"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<div class="py-1 bg-dark">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col">
+					<div class="owl-carousel owl-carousel-promo" th:data-loop="true"
+						data-items="[3,3,2,1]" th:data-margin="10" th:data-nav="true">
+						<h6 class="fs-14 text-uppercase text-center text-white m-0">
+							<i class="icon-truck mr-1 text-opaque"></i>FREESHIP CHO MỌI ĐƠN
+							HÀNG
+						</h6>
+						<h6 class="fs-14 text-uppercase text-center text-white m-0">
+							<i class="icon-award mr-1 text-opaque"></i>THƯƠNG HIỆU NƯỚC HOA
+							UY TÍN TỪ 2023
+						</h6>
+						<h6 class="fs-14 text-uppercase text-center text-white m-0">
+							<i class="icon-shield mr-1 text-opaque"></i>ĐẢM BẢO HOÀN TIỀN
+							TRONG 30 NGÀY
+						</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<!-- logo -->
+			<a th:href="@{/home}" class="navbar-brand order-1 order-lg-2"> <svg
+					version="1.0" xmlns="http://www.w3.org/2000/svg"
+					width="200.000000pt" height="35.000000pt"
+					viewBox="0 0 562.000000 73.000000"
+					preserveAspectRatio="xMidYMid meet">
+
+                    <g
+						transform="translate(0.000000,73.000000) scale(0.100000,-0.100000)"
+						fill="#000000" stroke="none">
+                        <path
+						d="M170 345 l0 -205 128 0 c200 0 242 22 242 127 0 56 -12 89 -39 110
+-13 9 -14 14 -3 24 6 7 12 33 12 56 0 33 -6 50 -25 68 -23 24 -28 25 -170 25
+l-145 0 0 -205z m245 114 c4 -5 4 -21 1 -35 -6 -24 -9 -25 -79 -22 l-72 3 -3
+33 -3 32 75 0 c42 0 78 -5 81 -11z m29 -161 c7 -11 7 -26 0 -45 -9 -28 -10
+-28 -94 -28 l-85 0 -3 33 c-6 60 -1 63 89 60 64 -2 84 -7 93 -20z" />
+                        <path
+						d="M780 344 l0 -206 155 4 c151 3 155 4 180 29 48 47 51 152 8 201 -12
+14 -13 23 -4 48 14 42 4 87 -27 110 -22 18 -41 20 -168 20 l-144 0 0 -206z
+m245 91 l0 -30 -72 -3 -73 -3 0 36 0 36 73 -3 72 -3 0 -30z m29 -131 c10 -25
+7 -59 -6 -72 -7 -7 -43 -12 -90 -12 l-78 0 0 50 0 50 84 0 c67 0 85 -3 90 -16z" />
+                        <path
+						d="M1390 344 l0 -205 48 3 47 3 3 58 3 57 70 0 c127 0 173 41 173 153
+-1 42 -6 65 -21 85 -33 45 -58 52 -195 52 l-128 0 0 -206z m240 107 c15 -29
+12 -72 -7 -93 -12 -13 -31 -18 -75 -18 l-58 0 0 65 0 65 65 0 c53 0 66 -3 75
+-19z" />
+                        <path
+						d="M1972 348 l3 -203 163 -3 162 -2 0 40 0 40 -115 0 -115 0 0 45 0 45
+85 0 85 0 0 40 0 40 -85 0 -85 0 0 40 0 40 115 0 115 0 0 40 0 40 -165 0 -165
+0 2 -202z" />
+                        <path
+						d="M2540 346 l0 -206 45 0 45 0 0 70 0 70 40 0 c38 0 40 -2 80 -70 l41
+-70 44 0 c26 0 45 5 45 11 0 6 -16 38 -35 71 l-35 60 29 27 c36 34 45 65 39
+132 -4 37 -12 58 -32 77 -26 26 -30 27 -166 30 l-140 4 0 -206z m241 100 c8
+-16 8 -34 2 -53 -9 -27 -12 -28 -81 -31 l-72 -3 0 56 0 55 70 0 c65 0 71 -2
+81 -24z" />
+                        <path
+						d="M3130 345 l0 -205 45 0 44 0 3 78 3 77 88 3 88 3 -3 37 -3 37 -87 3
+-88 3 0 44 0 44 118 3 117 3 3 38 3 37 -165 0 -166 0 0 -205z" />
+                        <path
+						d="M3672 408 c4 -172 18 -209 89 -246 58 -31 182 -29 225 4 64 48 69 62
+72 230 l3 154 -45 0 -46 0 0 -124 c0 -130 -10 -180 -40 -196 -32 -17 -106 -12
+-131 9 -23 18 -24 26 -27 165 l-3 146 -51 0 -50 0 4 -142z" />
+                        <path
+						d="M4300 345 l0 -205 45 0 45 0 0 99 c0 55 4 102 9 105 5 3 25 -33 45
+-82 50 -121 46 -117 103 -120 l50 -3 44 106 c24 58 47 105 51 105 4 0 8 -47 8
+-106 l0 -105 48 3 47 3 0 200 0 200 -61 3 -61 3 -59 -142 c-32 -78 -63 -141
+-68 -141 -5 1 -35 63 -66 139 l-58 138 -61 3 -61 3 0 -206z" />
+                        <path
+						d="M5030 345 l0 -205 163 2 162 3 3 37 3 37 -118 3 -118 3 0 40 0 40 88
+3 87 3 0 39 0 40 -90 0 -90 0 0 40 0 39 118 3 117 3 3 38 3 37 -165 0 -166 0
+0 -205z" />
+                    </g>
+                </svg>
+			</a>
+			<!-- logo -->
+
+			<div class="collapse navbar-collapse order-4 order-lg-1"
+				id="navbarMenu">
+
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/home}">
+							Trang chủ </a></li>
+
+					<li class="nav-item dropdown dropdown-lg dropdown-hover"><a
+						class="nav-link dropdown-toggle" id="navbarDropdown-20"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Thương hiệu </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown-20">
+
+							<div class="container-md">
+								<div class="row ">
+									<div class="col">
+										<ul class="menu-list">
+											<li class="menu-list-item"><a
+												th:href="@{/product/bvlgari}" class="menu-list-link">BVLGARI
+											</a>
+											<li class="menu-list-item"><a
+												th:href="@{/product/kilian}" class="menu-list-link">KILIAN
+											</a>
+										</ul>
+									</div>
+									<div class="col">
+										<ul class="menu-list">
+											<li class="menu-list-item"><a th:href="@{/product/ysl}"
+												class="menu-list-link">YVES SAINT LAURENT </a>
+											<li class="menu-list-item"><a
+												th:href="@{/product/versace}" class="menu-list-link">VERSACE
+											</a>
+										</ul>
+									</div>
+									<div class="col">
+										<ul class="menu-list">
+											<li class="menu-list-item"><a
+												th:href="@{/product/chanel}" class="menu-list-link">CHANEL
+											</a>
+											<li class="menu-list-item"><a th:href="@{/product/jpg}"
+												class="menu-list-link">JEAN PAUL GAULTIER </a>
+										</ul>
+									</div>
+									<div class="col">
+										<ul class="menu-list">
+											<li class="menu-list-item"><a th:href="@{/product/dior}"
+												class="menu-list-link">DIOR </a>
+											<li class="menu-list-item"><a
+												th:href="@{/product/tomford}" class="menu-list-link">TOM
+													FORD </a>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div></li>
+
+
+					<li class="nav-item dropdown dropdown-sm dropdown-hover"><a
+						th:href="@{/product/allproduct}" class="nav-link dropdown-toggle"
+						id="navbarDropdown-2" role="button"> Sản phẩm </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown-2">
+							<div class="container">
+								<div class="row ">
+									<div class="col">
+										<span class="eyebrow text-muted mb-1">Nước Hoa</span>
+										<ul class="menu-list">
+											<li class="menu-list-item"><a
+												th:href="@{/product/menproduct}" class="menu-list-link">Nam</a>
+											<li class="menu-list-item"><a
+												th:href="@{/product/womenproduct}" class="menu-list-link">
+													Nữ</a>
+											<li class="menu-list-item"><a
+												th:href="@{/product/unisexproduct}" class="menu-list-link">Unisex</a>
+											<li class="menu-list-item"><a
+												th:href="@{/product/miniproduct}" class="menu-list-link">
+													Mini</a>
+											<li class="menu-list-item"><a
+												th:href="@{/product/nicheproduct}" class="menu-list-link">
+													NICHE</a>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div></li>
+
+					<li class="nav-item dropdown-sm dropdown-hover"><a
+						class="nav-link dropdown-toggle" role="button" id="contactLink"
+						href="#contactSection"> Liên hệ </a></li>
+				</ul>
+			</div>
+
+
+			<div class="collapse navbar-collapse order-5 order-lg-3"
+				id="navbarMenu2">
+				<ul class="navbar-nav ml-auto position-relative">
+
+					<!-- users -->
+					<li class="nav-item dropdown dropdown-sm dropdown-hover"><a
+						class="nav-icon dropdown-toggle" id="navbarDropdown-6"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i
+							class="icon-user d-none d-lg-inline-block"></i> <span
+							class="d-inline-block d-lg-none">Tài khoản</span>
+					</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown-6">
+							<div class="row gutter-2">
+								<div class="col-12">
+
+									<div sec:authorize="!isAuthenticated()">
+										<ul class="menu-list">
+											<li class="menu-list-item"><a th:href="@{/login}"
+												class="menu-list-link">Đăng nhập</a></li>
+											<li class="menu-list-item"><a th:href="@{/register}"
+												class="menu-list-link">Đăng ký tài khoản</a></li>
+										</ul>
+									</div>
+
+
+									<div sec:authorize="isAuthenticated()">
+
+										<div sec:authorize="hasAuthority('USER')">
+											<ul class="menu-list">
+												<li class="menu-list-item"><a
+													th:href="@{/personal/profile}" class="menu-list-link">Thông
+														tin tài khoản</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/personal/cart}" class="menu-list-link">Giỏ
+														hàng</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/personal/orders}" class="menu-list-link">Đơn
+														hàng</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/personal/changepassword}"
+													class="menu-list-link">Đổi mật khẩu</a></li>
+												<li class="menu-list-item"><a th:href="@{/logout}"
+													class="menu-list-link">Đăng xuất</a></li>
+											</ul>
+										</div>
+
+										<div sec:authorize="hasAuthority('ADMIN')">
+											<ul class="menu-list">
+												<li class="menu-list-item"><a
+													th:href="@{/personal/profile}" class="menu-list-link">Thông
+														tin tài khoản</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/admin/accountmanager}" class="menu-list-link">Quản
+														lý tài khoản khách hàng</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/vendor/ordermanager}" class="menu-list-link">Quản
+														lý đơn hàng</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/vendor/productmanager}" class="menu-list-link">Quản
+														lý sản phẩm</a></li>
+														<li class="menu-list-item"><a
+													th:href="@{/vendor/statistics}" class="menu-list-link">Thống kê</a></li>
+												<li class="menu-list-item"><a th:href="@{/logout}"
+													class="menu-list-link">Đăng xuất</a></li>
+											</ul>
+										</div>
+										<div sec:authorize="hasAuthority('VENDOR')">
+											<ul class="menu-list">
+												<li class="menu-list-item"><a
+													th:href="@{/personal/profile}" class="menu-list-link">Thông
+														tin tài khoản</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/vendor/ordermanager}" class="menu-list-link">Quản
+														lý đơn hàng</a></li>
+												<li class="menu-list-item"><a
+													th:href="@{/vendor/productmanager}" class="menu-list-link">Quản
+														lý sản phẩm</a></li>
+														<li class="menu-list-item"><a
+													th:href="@{/vendor/statistics}" class="menu-list-link">Thống kê</a></li>
+												<li class="menu-list-item"><a th:href="@{/logout}"
+													class="menu-list-link">Đăng xuất</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div></li>
+
+
+					<!-- search -->
+					<li class="nav-item dropdown dropdown-md dropdown-hover"><a
+						class="nav-icon dropdown-toggle" id="navbarDropdown-4"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i
+							class="icon-search d-none d-lg-inline-block"></i> <span
+							class="d-inline-block d-lg-none">Tìm kiếm</span>
+					</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown-4">
+							<div class="form-group">
+								<form class="d-flex align-items-center position-relative"
+									method="get" th:action="@{/product/findproduct}">
+									<button type="submit"  class="btn p-0 position-absolute"
+										style="left: 10px; top: 50%; transform: translateY(-50%); border: none; background: transparent;">
+										<img
+										th:src="@{//theme.hstatic.net/1000340570/1000964732/14/icon-search.svg?v=6611}"
+										alt="Tìm kiếm" style="width: 20px; height: 20px;">
+									</button>
+									<input type="text" name="query" class="form-control pl-5"
+										id="searchForm" placeholder="Tìm kiếm"
+										style="padding-left: 40px;">
+								</form>
+							</div>
+						</div></li>
+
+
+
+					<!-- cart -->
+					<li class="nav-item dropdown dropdown-md dropdown-hover">
+						<a class="nav-icon dropdown-toggle" id="navbarDropdown-8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="icon-shopping-bag d-none d-lg-inline-block"></i>
+							<span class="d-inline-block d-lg-none">Giỏ hàng</span>
+						</a>
+						<span class="badge badge-pill badge-danger badge-span" th:text="${session.usercart != null ? session.usercart.size() : 0}"></span>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown-8" >
+							<div class="row gutter-3">
+								<div class="col-12">
+									<h3 class="eyebrow text-dark fs-16 mb-0">Giỏ hàng</h3>
+								</div>
+								<div class="col-12" th:if="${session.usercart != null}"  th:each="cart : ${session.usercart}">
+									<div class="cart-item">
+										<a th:href="@{/product/productdetail/{id}(id=${cart.productid})}" class="cart-item-image"><img th:src="${cart.imageurl}" alt="Image"></a>
+										<div class="cart-item-body">
+											<div class="row">
+												<div class="col-9">
+													<h5 class="cart-item-title" th:text="${cart.productname}"></h5>
+													<small th:text="${cart.brand}"></small>
+													<br>
+													<span class="text-red price" th:text="${cart.price}"></span>
+												</div>
+												<div class="col-3 text-right">
+													<ul class="cart-item-options">
+														<li><a th:href="@{/personal/cart/delete/{id}(id=${cart.cartid})}" class="icon-x"></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<ul class="list-group list-group-minimal">
+										<li class="list-group-item d-flex justify-content-between align-items-center text-uppercase font-weight-bold">
+											TỔNG THANH TOÁN <span class="price text-red" th:text="${session.totalprice}"></span>
+										</li>
+									</ul>
+								</div>
+								<div class="col-12">
+									<a th:href="@{/personal/cart}" class="btn btn-outline-secondary btn-block">Xem giỏ hàng</a>
+									<a th:href="@{/personal/checkoutall}" class="btn btn-primary btn-block">Thanh toán</a>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="order-2 d-flex d-lg-none" id="navbarMenuMobile">
+				<ul class="navbar-nav navbar-nav--icons ml-auto position-relative">
+
+					<!-- search -->
+					<li class="nav-item"><a class="nav-icon"> <i
+							class="icon-search"></i>
+					</a></li>
+
+					<!-- cart -->
+					<li class="nav-item dropdown dropdown-md dropdown-hover"><a
+						class="nav-icon"> <i class="icon-shopping-bag"></i>
+					</a></li>
+
+					<!-- menu -->
+					<li class="nav-item dropdown dropdown-md dropdown-hover"><a
+						class="nav-icon" data-toggle="collapse"
+						data-target=".navbar-collapse" aria-controls="navbarMenu"
+						aria-expanded="false" aria-label="Toggle navigation"> <i
+							class="icon-menu"></i>
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</header>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/vendor.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <title>Listing</title>
+  </head>
+  <body>
+
+    <div th:replace="home/header :: header"></div>
+
+	<section style="padding: 2.5rem 0;"></section>
+	
+    <!-- breadcrumbs -->
+    <section class="breadcrumbs bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#!">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nước hoa nam</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- listing -->
+    <section class="pt-6">
+      <div class="container">
+
+        <div class="row gutter-4">
+
+          <!-- sidebar -->
+          <aside class="col-lg-3 sidebar">
+            <div class="widget">
+              <span class="widget-title">Bộ lọc <!-- <a href="" class="small text-red">clear</a> --></span>
+              <div class="accordion" id="accordion-1">
+                <div class="card">
+                  <div class="card-header" id="heading-1-1">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
+                        Thương hiệu
+                      </button>
+                    </h5>
+                  </div>
+				 <div id="collapse-1-1" class="collapse" aria-labelledby="heading-1-1">
+                    <div class="card-body">
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Bvlgari</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Yves Saint Laurent</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Chanel</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Dior</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Kilian</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Versace</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Jean Paul Gaultier</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Tom Ford</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  
+                <div class="card">
+                  <div class="card-header" id="heading-1-4">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-1-4" aria-expanded="false" aria-controls="collapse-1-4">
+                        Mức giá
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapse-1-4" class="collapse" aria-labelledby="heading-1-4">
+                    <div class="card-body">  
+                      <input type="text" class="rangeslider" name="Range Slider" value="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>    
+          </aside>
+
+          <!-- content -->
+          <div class="col-lg-9">
+            <div class="row gutter-1 align-items-end">
+              <div class="col-md-6">
+                <h1>Nước hoa nam</h1>
+              </div>
+              <div class="col-md-6 text-md-right">
+                <ul class="list list--horizontal list--separated text-muted fs-14">
+                  <li>
+                    <span>15 from 90 items</span>
+                  </li>
+                  <li>
+                      <span>Sort by
+                      <span class="dropdown">
+                        <a class="dropdown-toggle underline" href="#!" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Most popular
+                        </a>
+
+                        <span class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item" href="#!">Action</a>
+                          <a class="dropdown-item" href="#!">Another action</a>
+                          <a class="dropdown-item" href="#!">Something else here</a>
+                        </span>
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row gutter-1">
+
+              <div class="col-6 col-md-4">
+                <div class="card card-product">
+                  <figure class="card-image">
+                    <a href="#!" class="action"><i class="icon-heart"></i></a>
+                    <a href="#!">
+                      <img src="assets/images/demo/product-listing-1.jpg" alt="Image">
+                      <img src="assets/images/demo/product-listing-1-1.jpg" alt="Image">
+                    </a>
+                    <span class="badge badge-success">New</span>
+                  </figure>
+                  <div class="card-footer">
+                    <h3 class="card-title"><a href="">Burgundy Dress</a></h3>
+                    <span class="brand">Brand</span>
+                    <span class="price">$130.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="card card-product">
+                  <figure class="card-image">
+                    <a href="#!" class="action"><i class="icon-heart"></i></a>
+                    <a href="#!">
+                      <img src="assets/images/demo/product-listing-2.jpg" alt="Image">
+                      <img src="assets/images/demo/product-listing-2-1.jpg" alt="Image">
+                    </a>
+                    <span class="badge badge-success">New</span>
+                  </figure>
+                  <div class="card-footer">
+                    <h3 class="card-title"><a href="">Cream Dress</a></h3>
+                    <span class="price">$118.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="card card-product">
+                  <figure class="card-image">
+                    <a href="#!" class="action"><i class="icon-heart"></i></a>
+                    <a href="#!">
+                      <img src="assets/images/demo/product-listing-3.jpg" alt="Image">
+                      <img src="assets/images/demo/product-listing-3-1.jpg" alt="Image">
+                    </a>
+                    <span class="badge badge-success">New</span>
+                  </figure>
+                  <div class="card-footer">
+                    <h3 class="card-title"><a href="">Stripe Dress</a></h3>
+                    <span class="price text-red"><s>$130.00</s> $80.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="card card-product">
+                  <figure class="card-image">
+                    <a href="#!" class="action"><i class="icon-heart"></i></a>
+                    <a href="#!">
+                      <img src="assets/images/demo/product-listing-4.jpg" alt="Image">
+                      <img src="assets/images/demo/product-listing-4-1.jpg" alt="Image">
+                    </a>           
+                  </figure>
+                  <div class="card-footer">
+                    <h3 class="card-title"><a href="">Blue Stripe Dress</a></h3>
+                    <span class="brand">Brand</span>
+                    <span class="price">$98.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="card card-product">
+                  <figure class="card-image">
+                    <a href="#!" class="action"><i class="icon-heart"></i></a>
+                    <a href="#!">
+                      <img src="assets/images/demo/product-listing-5.jpg" alt="Image">
+                      <img src="assets/images/demo/product-listing-5-1.jpg" alt="Image">
+                    </a>
+                  </figure>
+                  <div class="card-footer">
+                    <h3 class="card-title"><a href="">Brown Dress</a></h3>
+                    <span class="brand">Brand</span>
+                    <span class="price">$110.00</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="card card-product">
+                  <figure class="card-image">
+                    <a href="#!" class="action"><i class="icon-heart"></i></a>
+                    <a href="#!">
+                      <img src="assets/images/demo/product-listing-6.jpg" alt="Image">
+                      <img src="assets/images/demo/product-listing-6-1.jpg" alt="Image">
+                    </a>
+                  </figure>
+                  <div class="card-footer">
+                    <h3 class="card-title"><a href="">Sage Dress</a></h3>
+                    <span class="brand">Brand</span>
+                    <span class="price">$120.00</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#!">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#!">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#!">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#!">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#!">Next</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div th:replace="home/footer :: footer"></div>
+
+
+    <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

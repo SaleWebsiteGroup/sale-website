@@ -1,0 +1,46 @@
+<div class="cart-item" th:if="${usercart != null}" th:each="cart : ${usercart}" th:fragment="order-cart" xmlns:th="https://www.thymeleaf.org">
+	<!--checkbox-->
+	<div class="cart-item-header ">
+		<input class="cart-item-checkbox" name="selectedProduct" th:value="${cart.productid}"  type="checkbox" id="checkbox-item-1" onchange="updateCartTotal()">
+	</div>
+	<!--hinh anh-->
+	<a th:href="@{/product/productdetail/{id}(id=${cart.productid})}" class="cart-item-image"><img th:src="${cart.imageurl}" alt="Image"></a>
+	<div class="cart-item-body">
+		<div class="row">
+			<div class="col-10">
+				<div class="row">
+					<!--ten san pham, thuong hieu, gia tien-->
+					<div class="col-md-6">
+						<h5 class="cart-item-title" th:text="${cart.productname}"></h5>
+						<small class="cart-item-subtitle" th:text="${cart.brand}"></small>
+						<ul class="cart-item-meta">
+							<li class="text-red quantity-price" th:data-price="${cart.price}" id="quantity-price">
+								<span class="price" th:text="${cart.price}"></span>
+							</li>
+
+						</ul>
+					</div>
+					<!--so luong-->
+					<div class="col-md-6">
+						<ul class="list list--horizontal">
+							<li>
+								<div class="dYBF91">
+									<button type="button" class="aGq8SN" onclick="changeQuantity(this, -1); updateCartTotal();" aria-label="Decrease">-</button>
+									<input class="aGq8SN jKOh4z quantity-input" type="number" th:value="${cart.quantity}" min="1" max="100" step="1" th:name="'quantity-'+${cart.productid}" 
+               th:id="'quantity-' + ${cart.productid}" data-productid="${cart.productid}" onchange="updateCartTotal()">
+									<button type="button" class="aGq8SN" onclick="changeQuantity(this, 1); updateCartTotal();" aria-label="Increase">+</button>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--nut xoa-->
+			<div class="col-2 text-right">
+				<ul class="cart-item-options">
+					<li><a th:href="@{/personal/cart/delete/{id}(id=${cart.cartid})}" class="icon-x"></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

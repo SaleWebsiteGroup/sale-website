@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+    <title th:text="'Đơn hàng'"></title>
+</head>
+<body class="bg-light">
+
+<!-- header -->
+<div th:replace="~{decorator/header :: header}"></div>
+
+<!-- content -->
+<section>
+    <div class="container">
+        <div class="row gutter-1 gutter-md-2">
+            <div class="col-lg-4">
+                <aside class="bg-white p-2 p-md-3">
+                    <h3 class="fs-20 text-uppercase text-muted mb-2">Welcome, John Doe!</h3>
+                    <div class="nav nav-menu flex-column lavalamp" id="sidebar-1" role="tablist">
+                        <a class="nav-link " data-toggle="tab"  th:href="@{/orders}" role="tab"  aria-controls="sidebar-1" aria-selected="true"><i class="fs-24 icon-box"></i> Orders</a>
+                        <a class="nav-link " data-toggle="tab" th:href="@{/personalData}" role="tab" aria-controls="sidebar-1-3" aria-selected="false"><i class="fs-24 icon-user"></i> Personal data </a>
+                        <a class="nav-link" data-toggle="tab"  th:href="@{/changePassword}" role="tab" aria-controls="sidebar-1-4" aria-selected="false"><i class="fs-24 icon-lock"></i> Change password</a>
+                        <a class="nav-link active" data-toggle="tab"  th:href="@{/addresses}" role="tab" aria-controls="sidebar-1-5" aria-selected="false"><i class="fs-24 icon-home"></i> Addresses</a>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-lg-8">
+                <div class="bg-white p-2 p-md-3">
+                    <div class="tab-content" id="myTabContent">
+
+                        <!-- Orders Tab -->
+                        <div class="tab-pane fade " id="sidebar-1-1" role="tabpanel" aria-labelledby="sidebar-1-1">
+                            <div class="row">
+                                <div class="col">
+                                    <h2>Orders</h2>
+                                </div>
+                            </div>
+                            <div class="row gutter-2" th:if="${orders != null}">
+                                <!-- Loop through orders -->
+                                <div class="col-12" th:each="order : ${orders}">
+                                    <div class="card card-data bordered">
+                                        <div class="card-header">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <h2 class="card-title fs-18">
+                                                        <a th:href="@{'/order/' + ${order.orderId}}" th:text="'Order ' + ${order.orderId}">Order 123</a>
+                                                    </h2>
+                                                </div>
+                                                <div class="col text-right">
+                            <span class="dropdown">
+                                <button class="btn btn-lg btn-white btn-ico" id="dropdown-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">
+                                    <i class="icon-more-vertical"></i>
+                                </button>
+                                <span class="dropdown-menu" aria-labelledby="dropdown-1">
+                                    <a class="dropdown-item" th:href="@{'/order/' + ${order.orderId} + '/edit'}">Edit</a>
+                                    <a class="dropdown-item" th:href="@{'/order/' + ${order.orderId} + '/cancel'}">Cancel</a>
+                                </span>
+                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Check if products exist -->
+                                            <ul class="order-preview">
+                                                <li th:if="${order.orderProducts != null and order.orderProducts.size() > 0}" th:each="orderProduct : ${order.orderProducts}">
+                                                    <a th:href="@{'/product/' + ${orderProduct.product.productId}}" th:title="${orderProduct.product.productName}">
+                                                        <img th:src="@{'/assets/images/products/' + ${orderProduct.product.imageURL}}" th:alt="${orderProduct.product.productName}">
+                                                    </a>
+                                                    <p th:text="'Quantity: ' + ${orderProduct.quantity}"></p>
+                                                </li>
+                                                <li th:if="${order.orderProducts == null or order.orderProducts.size() == 0}">
+                                                    <p>Không có thông tin sản phẩm</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Order metadata -->
+                                            <ul class="order-meta">
+                                                <li>
+                                                    <h5 class="order-meta-title">Order ID</h5>
+                                                    <span th:text="${order.orderId}"></span>
+                                                </li>
+                                                <li>
+                                                    <h5 class="order-meta-title">Order Date</h5>
+                                                    <span th:text="${#dates.format(order.orderDate, 'dd MMM yyyy')}"></span>
+                                                </li>
+                                                <li>
+                                                    <h5 class="order-meta-title">Total Amount</h5>
+                                                    <span th:text="${order.totalAmount}"></span>
+                                                </li>
+                                                <li>
+                                                    <h5 class="order-meta-title">Payment Method</h5>
+                                                    <span th:text="${order.paymentMethod}"></span>
+                                                </li>
+                                                <li>
+                                                    <h5 class="order-meta-title">Delivery Status</h5>
+                                                    <span class="text-muted" th:text="${order.deliveryStatus}"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- No orders message -->
+                            <div th:if="${orders == null or orders.size() == 0}">
+                                <p>Không có thông tin đơn hàng</p>
+                            </div>
+                        </div>
+
+
+
+                        <!-- personal data -->
+                        <div class="tab-pane fade " id="sidebar-1-3" role="tabpanel" aria-labelledby="sidebar-1-3">
+                            <div class="row">
+                                <div class="col">
+                                    <h2>Personal Data</h2>
+                                </div>
+                            </div>
+
+                            <!-- Check if user data exists -->
+                            <div th:if="${user != null}">
+                                <form th:action="@{/users/update}" method="post">
+                                    <!-- Username -->
+                                    <fieldset class="mb-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input type="text" id="inputUsername" name="username" class="form-control form-control-lg"
+                                                           placeholder="Username" readonly th:value="${user.username}">
+                                                    <label for="inputUsername">Username</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Full Name -->
+                                    <fieldset class="mb-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input type="text" id="inputFullName" name="fullName" class="form-control form-control-lg"
+                                                           placeholder="Full Name" required th:value="${user.fullName}">
+                                                    <label for="inputFullName">Full Name</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Email -->
+                                    <fieldset class="mb-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input type="email" id="inputEmail" name="email" class="form-control form-control-lg"
+                                                           placeholder="Email Address" required th:value="${user.email}">
+                                                    <label for="inputEmail">Email Address</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Address -->
+                                    <fieldset class="mb-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input type="text" id="inputAddress" name="address" class="form-control form-control-lg"
+                                                           placeholder="Address" th:value="${user.address}">
+                                                    <label for="inputAddress">Address</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Phone Number -->
+                                    <fieldset class="mb-2">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input type="text" id="inputPhoneNumber" name="phoneNumber" class="form-control form-control-lg"
+                                                           placeholder="Phone Number" th:value="${user.phoneNumber}">
+                                                    <label for="inputPhoneNumber">Phone Number</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Role (Optional Display) -->
+                                    <fieldset class="mb-2" th:if="${user.role != null}">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-label-group">
+                                                    <input type="text" id="inputRole" class="form-control form-control-lg"
+                                                           placeholder="Role" readonly th:value="${user.role.roleName}">
+                                                    <label for="inputRole">Role</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Submit Button -->
+                                    <div class="row">
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- If no user data -->
+                            <div th:if="${user == null}">
+                                <p>Chưa có thông tin user</p>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- change password -->
+                        <div class="tab-pane fade" id="sidebar-1-4" role="tabpanel" aria-labelledby="sidebar-1-4">
+                            <div class="row">
+                                <div class="col">
+                                    <h2>Change Password</h2>
+                                </div>
+                            </div>
+
+                            <form th:action="@{/users/change-password}" method="post">
+                                <!-- Current Password -->
+                                <fieldset class="mb-2">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-label-group">
+                                                <input type="password" id="currentPassword" name="currentPassword"
+                                                       class="form-control form-control-lg" placeholder="Current Password" required>
+                                                <label for="currentPassword">Current Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- New Password -->
+                                <fieldset class="mb-2">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-label-group">
+                                                <input type="password" id="newPassword" name="newPassword"
+                                                       class="form-control form-control-lg" placeholder="New Password" required>
+                                                <label for="newPassword">New Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- Confirm New Password -->
+                                <fieldset class="mb-2">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-label-group">
+                                                <input type="password" id="confirmPassword" name="confirmPassword"
+                                                       class="form-control form-control-lg" placeholder="Confirm New Password" required>
+                                                <label for="confirmPassword">Confirm New Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- Submit Button -->
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary">Save Password</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                        <div class="tab-pane fade show active" id="sidebar-1-5" role="tabpanel" aria-labelledby="sidebar-1-5">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h2>Addresses</h2>
+                                </div>
+                                <div class="col-md-6 text-md-right">
+                                    <a th:href="@{/addresses/add}" class="underline"><i class="icon-plus"></i> Add New Address</a>
+                                </div>
+                            </div>
+                            <div class="row gutter-2">
+                                <!-- Loop through addresses -->
+                                <div class="col-lg-6" th:each="address : ${user.addresses}">
+                                    <div class="card card-data bordered">
+                                        <div class="card-header">
+                                            <div class="row align-items-center">
+                                                <div class="col-8">
+                                                    <h2 class="card-title eyebrow" th:text="${address.addressLabel != null ? address.addressLabel : 'Delivery Address'}">
+                                                        Delivery Address
+                                                    </h2>
+                                                </div>
+                                                <div class="col text-right">
+                            <span class="dropdown">
+                                <button class="btn btn-lg btn-white btn-ico" id="dropdown-[[${address.addressId}]]"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">
+                                    <i class="icon-more-vertical"></i>
+                                </button>
+                                <span class="dropdown-menu" th:aria-labelledby="'dropdown-' + ${address.addressId}">
+                                    <a class="dropdown-item" th:href="@{/addresses/edit/{id}(id=${address.addressId})}">Edit</a>
+                                    <a class="dropdown-item" th:href="@{/addresses/delete/{id}(id=${address.addressId})}"
+                                       onclick="return confirm('Are you sure you want to delete this address?');">Delete</a>
+                                </span>
+                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <p>
+                                                <span th:text="${address.fullName}">John Doe</span> <br/>
+                                                <span th:text="${address.street}">123 Main Street</span> <br/>
+                                                <span th:text="${address.city}">City</span>,
+                                                <span th:text="${address.state}">State</span>
+                                                <span th:text="${address.zipCode}">00000</span> <br/>
+                                                <span th:text="${address.country}">Country</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- If no addresses -->
+                                <div class="col-12" th:if="${user.addresses == null or user.addresses.size() == 0}">
+                                    <p>No addresses found. Add a new address to manage your deliveries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<!-- footer -->
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

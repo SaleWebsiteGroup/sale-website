@@ -1,0 +1,52 @@
+<!-- filter -->
+<aside class="col-lg-3 sidebar" th:fragment="filter" xmlns:th="https://www.thymeleaf.org">
+    <form th:action="@{/product/allproduct}" method="get">
+        <!-- Hidden inputs to retain sorting -->
+        <input type="hidden" name="sortField" th:value="${sortField}">
+        <input type="hidden" name="sortDir" th:value="${sortDir}">
+
+        <div class="widget">
+            <span class="widget-title">
+                <span th:text="|Bộ lọc|">Bộ lọc</span>
+            </span>
+            <div class="accordion" id="accordion-1">
+                <div class="card">
+                    <div class="card-header" id="heading-1-1">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-1-1" aria-expanded="true" aria-controls="collapse-1-1">
+                                <span th:text="|Thương hiệu|">Thương hiệu</span>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapse-1-1" class="collapse show" aria-labelledby="heading-1-1">
+                        <div class="card-body">
+                            <div class="custom-control custom-checkbox" th:each="brand : ${brands}">
+                                <input type="checkbox" class="custom-control-input" th:id="${'brand-' + brand.brandid}" th:value="${brand.brandname}" name="brands" 
+                                       th:checked="${selectedBrands != null && selectedBrands.contains(brand.brandname)}">
+                                <label class="custom-control-label" th:for="${'brand-' + brand.brandid}" th:text="${brand.brandname}">Brand Name</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="heading-1-4">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-1-4" aria-expanded="false" aria-controls="collapse-1-4">
+                                <span th:text="|Mức giá|">Mức giá</span>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapse-1-4" class="collapse" aria-labelledby="heading-1-4">
+                        <div class="card-body">
+                            <input type="text" class="rangeslider" name="priceRange" th:value="${priceRange}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget">
+            <button type="submit" class="btn btn-primary btn-block">Áp dụng</button>
+        </div>
+    </form>
+</aside>

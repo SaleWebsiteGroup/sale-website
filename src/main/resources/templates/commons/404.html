@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+<link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+<title th:text="|404 - Page Not Found|">404 - Page Not Found</title>
+</head>
+<body class="bg-light">
+    <div th:replace="~{decorator/header :: header}"></div>
+
+    <section class="section404">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="error-container">
+                     <br><br><br>
+                        <h1 class="display-1 text-warning">404</h1>
+                        <h2 th:text="|Không tìm thấy trang|">Không tìm thấy trang</h2>
+                        <p class="lead" th:text="|Trang bạn tìm kiếm không tồn tại hoặc đã bị di chuyển.|">
+                            Trang bạn tìm kiếm không tồn tại hoặc đã bị di chuyển.
+                        </p>
+                        <a th:href="@{/}" class="btn btn-primary mt-4"
+                            th:text="|Quay lại Trang chủ|">Quay lại Trang chủ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{decorator/footer :: footer}"></footer>
+
+    <script th:src="@{/assets/js/vendor.min.js}"></script>
+    <script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

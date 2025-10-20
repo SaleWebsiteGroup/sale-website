@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+    <title th:text="|Lỗi - Đã xảy ra sự cố|">Lỗi - Đã xảy ra sự cố</title>
+</head>
+<body class="bg-light">
+    <!-- Header -->
+    <div th:replace="~{decorator/header :: header}"></div>
+
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="error-container">
+                    <br><br><br>
+                        <h1 class="display-1 text-danger">Oops!</h1>
+                        <br>
+                        <h2 th:text="|Đã xảy ra một lỗi|">Đã xảy ra một lỗi</h2>
+                        <p class="lead" th:text="|Chúng tôi đang gặp một sự cố không mong muốn. Vui lòng thử lại sau hoặc liên hệ hỗ trợ.|">
+                            Chúng tôi đang gặp một sự cố không mong muốn. Vui lòng thử lại sau hoặc liên hệ hỗ trợ.
+                        </p>
+                        <div class="mt-4">
+                            <a th:href="@{/}" class="btn btn-primary"
+                               th:text="|Quay lại Trang chủ|">Quay lại Trang chủ</a>
+                            <a th:href="@{/contact}" class="btn btn-outline-secondary"
+                               th:text="|Báo cáo Lỗi|">Báo cáo Lỗi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{decorator/footer :: footer}"></footer>
+
+    <script th:src="@{/assets/js/vendor.min.js}"></script>
+    <script th:src="@{/assets/js/app.js}"></script>
+</body>
+</html>

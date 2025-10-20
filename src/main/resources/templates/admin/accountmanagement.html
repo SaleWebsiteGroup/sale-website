@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/assets/css/vendor.css}" rel="stylesheet" />
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet" />
+
+    <title th:text="'Quản lý tài khoản khách hàng'"></title>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{decorator/header :: header}"></div>
+
+<section style="padding: 2.5rem 0;"></section>
+
+<!-- Main Content -->
+<main class="container my-4">
+    <h1 class="text-center mb-4">Danh sách tài khoản khách hàng</h1>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="bg-light">
+            <tr>
+                <th>#</th>
+                <th>User ID</th>
+                <th>Tên đăng nhập</th>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Vai trò</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${userlist != null}" th:each="user, iterStat : ${userlist}">
+                <td th:text="${iterStat.index + 1}"></td>
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.fullname}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.address}"></td>
+                <td th:text="${user.phonenumber}"></td>
+                <td th:text="${user.role.rolename}"></td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editUserModal"
+                            th:attr="data-user-id=${user.id},
+                                     data-username=${user.username},
+                                     data-fullname=${user.fullname},
+                                     data-email=${user.email},
+                                     data-address=${user.address},
+                                     data-phonenumber=${user.phonenumber},
+                                     data-roleid=${user.role.roleid},
+                                     data-rolename=${user.role.rolename}">
+                        Sửa
+                    </button>
+                    <a th:href="@{/admin/accountmanager/delete/{id}(id=${user.id})}" type="button" class="btn btn-sm btn-danger">
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+            <tr th:if="${userlist == null}">
+                <td colspan="9" class="text-center">Không có tài khoản nào</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- Modal: Edit User -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Chỉnh sửa thông tin tài khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/admin/accountmanager/update}" method="post">
+                    <input type="hidden" id="id" name="id">
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Tên đăng nhập</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Họ và tên</label>
+                        <input type="text" id="fullname" name="fullname" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <input type="text" id="address" name="address" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                        <input type="text" id="phonenumber" name="phonenumber" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="rolename" class="form-label">Vai trò</label>
+                        <select id="rolename" name="rolename" class="form-select">
+                            <option value="ADMIN">Admin</option>
+                            <option value="USER">User</option>
+                            <option value="VENDOR">Vendor</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section></section>
+
+<footer th:replace="~{decorator/footer :: footer}"></footer>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/js/vendor.min.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const editUserModal = document.getElementById("editUserModal");
+
+        editUserModal.addEventListener("show.bs.modal", function (event) {
+            const button = event.relatedTarget;
+
+            const userId = button.getAttribute("data-user-id");
+            const username = button.getAttribute("data-username");
+            const fullName = button.getAttribute("data-fullname");
+            const email = button.getAttribute("data-email");
+            const address = button.getAttribute("data-address");
+            const phoneNumber = button.getAttribute("data-phonenumber");
+            const roleId = button.getAttribute("data-roleid");
+            const roleName = button.getAttribute("data-rolename");
+
+
+            document.getElementById("id").value = userId;
+            document.getElementById("username").value = username;
+            document.getElementById("fullname").value = fullName;
+            document.getElementById("email").value = email;
+            document.getElementById("address").value = address;
+            document.getElementById("phonenumber").value = phoneNumber;
+
+            const select = document.getElementById("rolename");
+            
+            
+            select.value = roleName;
+            select.dispatchEvent(new Event("change"));
+
+            
+        });
+    });
+</script>
+</body>
+</html>

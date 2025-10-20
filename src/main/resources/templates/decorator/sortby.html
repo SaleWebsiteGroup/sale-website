@@ -1,0 +1,20 @@
+<div class="col-md-6 text-md-right" th:fragment="sortby"  xmlns:th="https://www.thymeleaf.org">
+    <ul class="list list--horizontal list--separated text-muted fs-14">
+        <li>
+                      <span>Sắp xếp theo
+                      <span class="dropdown">
+                        <a class="dropdown-toggle underline" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Sản phẩm nổi bật
+                        </a>
+
+                        <span class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" th:href="@{/product/allproduct}" th:classappend="${sortField == 'productid' ? 'active' : ''}">Sản phẩm nổi bật</a>
+                          <a class="dropdown-item" th:href="@{/product/allproduct(sortField='price', sortDir='asc')}" th:classappend="${sortField == 'price' && sortDir == 'asc' ? 'active' : ''}">Giá tăng dần</a>
+                          <a class="dropdown-item" th:href="@{/product/allproduct(sortField='price', sortDir='desc')}" th:classappend="${sortField == 'price' && sortDir == 'desc' ? 'active' : ''}">Giá giảm dần</a>
+                        </span>
+                      </span>
+                    </span>
+        </li>
+    </ul>
+</div>
+
